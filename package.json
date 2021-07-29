@@ -1,0 +1,17 @@
+{
+  "name": "apba",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/components",
+    "packages/web"
+  ],
+  "scripts": {
+    "@root": "yarn -W",
+    "@all": "yarn workspaces",
+    "@cmp": "yarn workspace components",
+    "@web": "yarn workspace web"
+  }
+}
