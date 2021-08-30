@@ -1,0 +1,22 @@
+{
+  "name": "prisma",
+  "version": "0.0.1",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.2.0"
+  },
+  "scripts": {
+    "seed": "node ./seed/scenario.mjs",
+    "generate": "prisma generate",
+    "push": "prisma db push",
+    "studio": "prisma studio",
+    "test:psql": "node ./testPsql.mjs",
+    "test:prisma": "node ./testPrisma.mjs"
+  },
+  "devDependencies": {
+    "prisma": "^2.30.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.30.0"
+  }
+}

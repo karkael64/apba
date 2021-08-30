@@ -6,12 +6,17 @@
   "private": true,
   "workspaces": [
     "packages/components",
+    "packages/prisma",
     "packages/web"
   ],
   "scripts": {
     "@root": "yarn -W",
     "@all": "yarn workspaces",
     "@cmp": "yarn workspace components",
-    "@web": "yarn workspace web"
+    "@psm": "yarn workspace prisma",
+    "@web": "yarn workspace web",
+    "postinstall": "yarn @psm generate",
+    "build:db": "yarn @psm push && yarn @psm seed",
+    "start": "yarn @web dev"
   }
 }
