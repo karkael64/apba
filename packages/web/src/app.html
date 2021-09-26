@@ -8,6 +8,16 @@
 		%svelte.head%
 	</head>
 	<body>
+		<script>
+			(() => {
+				const params = new URLSearchParams(window.location.search);
+				if (params.has('session_state') || params.has('code')) {
+					params.delete('session_state');
+					params.delete('code');
+					window.location.search = params.toString();
+				}
+			})();
+		</script>
 		<div id="svelte">%svelte.body%</div>
 	</body>
 </html>

@@ -1,22 +1,4 @@
-import fetch from 'node-fetch';
-import type { ServerRequest, ServerResponse } from '@sveltejs/kit/types/hooks';
-import type { User } from '.prisma/client';
-
-type UserSession = {
-	id: string;
-	name: string;
-	lastname: string;
-	email: string;
-	token: string;
-};
-
-const PROTOCOL = ['http', 'https'].includes(process.env.PROTOCOL.toLowerCase())
-	? process.env.PROTOCOL.toLowerCase()
-	: 'http';
-const { API_HOST } = process.env;
-if (!API_HOST) {
-	throw new Error('API_HOST is not set in env');
-}
+import type { Env, Req, SessionRedirect, UserSession } from '../types/hooks';
 
 const readCookies = (cookies: string) => {
 	const chunks = cookies.split(/;\s+/);
@@ -33,27 +15,14 @@ const readCookies = (cookies: string) => {
 	}, initCookies as Record<string, string>);
 };
 
-const writeCookies = (res: ServerResponse, field: string, value: string) => {
-	res.headers['Set-Cookie'] = [`${queryStringify({ [field]: value })}; SameSite=Strict`];
-};
-
-const parseQueryString = (queryString: string) =>
-	queryString.split('&').reduce((acc, chunk) => {
-		const splitted = chunk.split('=');
-		const key = decodeURIComponent(splitted.shift());
-		const value = decodeURIComponent(splitted.join('='));
-		acc[key] = value;
-		return acc;
-	}, {} as Record<string, string>);
-
 const queryStringify = (params: Record<string, any>) =>
 	Object.keys(params)
 		.filter((p) => p && params[p] !== undefined && params[p] !== null)
 		.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
 		.join('&');
 
-const fetchToken = async (token: string): Promise<UserSession | null> => {
-	const resp = await fetch(`${API_HOST}/auth/refresh`, {
+const fetchToken = async (host: string, token: string): Promise<UserSession | null> => {
+	const resp = await fetch(`${host}/auth/refresh`, {
 		headers: { Authorization: `Bearer ${encodeURIComponent(token)}` }
 	});
 	const { data } = await resp.json();
@@ -70,11 +39,12 @@ const fetchToken = async (token: string): Promise<UserSession | null> => {
 };
 
 const fetchNewToken = async (
+	host: string,
 	sessionState: string,
 	code: string,
 	returns_to: string
 ): Promise<UserSession | null> => {
-	const url = `${API_HOST}/auth/token?${queryStringify({
+	const url = `${host}/auth/token?${queryStringify({
 		session_state: sessionState,
 		code,
 		redirect_uri: returns_to
@@ -104,58 +74,41 @@ const queryRemoveSession = (query: URLSearchParams) => {
 	return edit.toString();
 };
 
-type SessionOutput = {
-	user: UserSession;
-	token: string;
-	env: Record<string, string>;
-};
-
-type SessionRedirect = {
-	redirect: string;
-};
-
 /**
  * Create session object. Verify user is logged in, else redirect him to login page.
  */
-async function session(
-	req: ServerRequest,
-	res: ServerResponse
-): Promise<SessionOutput | SessionRedirect> {
-	const { token } = readCookies(req.headers.cookie);
-	const session_state = req.query.get('session_state');
-	const code = req.query.get('code');
-
-	// @todo: get the correct protocol
-	const returns_to = `${PROTOCOL}://${req.host}${req.path}${queryRemoveSession(req.query)}`;
-
-	const env = req.locals.env;
+async function session(req: Req, env: Env): Promise<UserSession | SessionRedirect> {
+	const { token } = readCookies(req.headers.cookie ?? '');
+	const { PROTOCOL: ptl, SSO_HOST: host } = env;
 
 	if (token) {
-		const user = await fetchToken(token);
+		const user = await fetchToken(host, token);
 		if (user) {
-			return { user, token, env };
+			return user;
 		}
 	}
 
+	const session_state = req.query.get('session_state');
+	const code = req.query.get('code');
+	const returns_to = `${ptl}://${req.host}${req.path}${queryRemoveSession(req.query)}`;
+
 	if (session_state && code) {
-		const user = await fetchNewToken(session_state, code, returns_to);
+		const user = await fetchNewToken(host, session_state, code, returns_to);
 		if (user) {
-			const { token } = user;
-			writeCookies(res, 'token', token);
-			return { user, token, env };
+			return user;
 		}
 	}
 
 	return {
-		redirect: `${API_HOST}/auth/login?${queryStringify({
+		redirect: `${host}/auth/login?${queryStringify({
 			redirect_uri: returns_to
 		})}`
 	};
 }
 
-export default function (req: ServerRequest, res: ServerResponse) {
+export default async function (req: Req, env: Env) {
 	try {
-		console.log({ req, res });
+		return await session(req, env);
 	} catch (e) {
 		throw new Error('Error at authentication');
 	}
