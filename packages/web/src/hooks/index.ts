@@ -23,5 +23,5 @@ export const handle: Handle = async ({ request, resolve }) => {
 };
 
 export const getSession: GetSession = (request) => {
-	return null;
+	return request.locals.session ?? null;
 };

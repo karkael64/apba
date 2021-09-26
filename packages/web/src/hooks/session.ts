@@ -1,6 +1,18 @@
 import fetch from 'node-fetch';
 import type { ServerRequest, ServerResponse } from '@sveltejs/kit/types/hooks';
+import type { User } from '.prisma/client';
 
+type UserSession = {
+	id: string;
+	name: string;
+	lastname: string;
+	email: string;
+	token: string;
+};
+
+const PROTOCOL = ['http', 'https'].includes(process.env.PROTOCOL.toLowerCase())
+	? process.env.PROTOCOL.toLowerCase()
+	: 'http';
 const { API_HOST } = process.env;
 if (!API_HOST) {
 	throw new Error('API_HOST is not set in env');
@@ -40,7 +52,7 @@ const queryStringify = (params: Record<string, any>) =>
 		.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
 		.join('&');
 
-const fetchToken = async (token: string) => {
+const fetchToken = async (token: string): Promise<UserSession | null> => {
 	const resp = await fetch(`${API_HOST}/auth/refresh`, {
 		headers: { Authorization: `Bearer ${encodeURIComponent(token)}` }
 	});
@@ -57,7 +69,11 @@ const fetchToken = async (token: string) => {
 	return null;
 };
 
-const fetchNewToken = async (sessionState: string, code: string, returns_to: string) => {
+const fetchNewToken = async (
+	sessionState: string,
+	code: string,
+	returns_to: string
+): Promise<UserSession | null> => {
 	const url = `${API_HOST}/auth/token?${queryStringify({
 		session_state: sessionState,
 		code,
@@ -88,17 +104,29 @@ const queryRemoveSession = (query: URLSearchParams) => {
 	return edit.toString();
 };
 
+type SessionOutput = {
+	user: UserSession;
+	token: string;
+	env: Record<string, string>;
+};
+
+type SessionRedirect = {
+	redirect: string;
+};
+
 /**
  * Create session object. Verify user is logged in, else redirect him to login page.
  */
-async function session(req: ServerRequest, res: ServerResponse) {
+async function session(
+	req: ServerRequest,
+	res: ServerResponse
+): Promise<SessionOutput | SessionRedirect> {
 	const { token } = readCookies(req.headers.cookie);
 	const session_state = req.query.get('session_state');
 	const code = req.query.get('code');
 
 	// @todo: get the correct protocol
-	const protocol = 'http';
-	const returns_to = `${protocol}://${req.host}${req.path}${queryRemoveSession(req.query)}`;
+	const returns_to = `${PROTOCOL}://${req.host}${req.path}${queryRemoveSession(req.query)}`;
 
 	const env = req.locals.env;
 
@@ -121,8 +149,7 @@ async function session(req: ServerRequest, res: ServerResponse) {
 	return {
 		redirect: `${API_HOST}/auth/login?${queryStringify({
 			redirect_uri: returns_to
-		})}`,
-		env
+		})}`
 	};
 }
 
