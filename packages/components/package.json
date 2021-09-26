@@ -6,11 +6,11 @@
 	"svelte": "index.ts",
 	"devDependencies": {
 		"@babel/core": "^7.14.8",
-		"@storybook/addon-actions": "^6.3.6",
-		"@storybook/addon-essentials": "^6.1.21",
-		"@storybook/addon-links": "^6.3.6",
-		"@storybook/addon-svelte-csf": "^1.0.0",
-		"@storybook/svelte": "^6.1.21",
+		"@storybook/addon-actions": "^6.3.8",
+		"@storybook/addon-essentials": "^6.3.8",
+		"@storybook/addon-links": "^6.3.8",
+		"@storybook/addon-svelte-csf": "^1.1.0",
+		"@storybook/svelte": "^6.3.8",
 		"babel-loader": "^8.2.2",
 		"svelte": "^3.41.0",
 		"svelte-loader": "^3.1.2"

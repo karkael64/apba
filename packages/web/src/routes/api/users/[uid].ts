@@ -1,6 +1,5 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { client, User } from '$lib/db';
-import { getSession } from '../../../hooks';
 
 const objectPick = <T extends Record<string, unknown>, K extends string = keyof T & string>(
 	object: T,
