@@ -1,12 +1,12 @@
 import { objectMap } from "./object";
 import { camelToKebab } from "./string";
 
+const negative = "#212529";
+const minus = "#343a40";
+const medium = "#6c757d";
+const bonus = "#ced4da";
+const positive = "#e9ecef";
 // https://coolors.co/9e0031-8e0045-770058-600047-44001a
-const positive = "#000000";
-const minus = "#c8c8c8";
-const medium = "#a1a1a1";
-const bonus = "#666666";
-const negative = "#ffffff";
 const primary = "#9e0031"; // vividBurgundy
 const secondary = "#770058"; // byzantium
 const pansyPurple = "#8e0045"; // pansyPurple
@@ -14,11 +14,11 @@ const tyrianPurple = "#600047"; // tyrianPurple
 const darkSienna = "#44001a"; // darkSienna
 
 // brightness +30%
-const positiveLight = "#ffffff";
-const minusLight = "#666666";
-const mediumLight = "#a1a1a1";
-const bonusLight = "#c8c8c8";
-const negativeLight = "#000000";
+const negativeLight = "#f8f9fa";
+const minusLight = "#e9ecef";
+const mediumLight = "#ced4da";
+const bonusLight = "#6c757d";
+const positiveLight = "#343a40";
 const primaryLight = "#ff2c6f";
 const secondaryLight = "#ff13c0";
 const pansyPurpleLight = "#ff238d";

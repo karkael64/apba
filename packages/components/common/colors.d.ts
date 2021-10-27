@@ -1,8 +1,8 @@
 type ColorName =
 	| "positive"
-	| "minus"
-	| "medium"
 	| "bonus"
+	| "medium"
+	| "minus"
 	| "negative"
 	| "primary"
 	| "secondary"
