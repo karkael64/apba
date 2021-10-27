@@ -5,7 +5,7 @@
 	import type { Load } from "@sveltejs/kit";
 
 	// see https://kit.svelte.dev/docs#loading
-	export const load: Load = async ({ session }) => {
+	export const load: Load = async () => {
 		return { props: { todos: []}};
 	};
 </script>

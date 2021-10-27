@@ -1,64 +1,53 @@
-<script>
+<script lang="ts">
 	import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
 	import Button from "./Button.svelte";
 </script>
 
 <Meta
-	title="Example/Button"
+	title="Button"
 	component={Button}
 	argTypes={{
-		label: {
-			control: "text",
-		},
-		primary: {
-			control: "boolean",
-		},
-		backgroundColor: {
-			control: "color",
-		},
-		size: {
+		color: {
 			control: {
 				type: "select",
-				options: ["small", "medium", "large"],
+				options: ["primary", "secondary"],
 			},
 		},
-		onClick: {
-			action: "onClick",
+		shape: {
+			control: {
+				type: "select",
+				options: ["square", "round", "circle"],
+			},
 		},
-	}}
-/>
+	}} />
 
 <Template let:args>
-	<Button {...args} on:click={args.onClick} />
+	<Button {...args} on:click={args.onClick}>{args.label}</Button>
 </Template>
 
 <Story
 	name="Primary"
 	args={{
-		primary: true,
+		color: "primary",
 		label: "Button",
-	}}
-/>
+	}} />
 
 <Story
 	name="Secondary"
 	args={{
 		label: "Button",
-	}}
-/>
+	}} />
 
 <Story
-	name="Large"
+	name="Square"
 	args={{
-		size: "large",
+		shape: "square",
 		label: "Button",
-	}}
-/>
+	}} />
 
 <Story
-	name="Small"
+	name="Circle"
 	args={{
-		size: "small",
+		shape: "circle",
 		label: "Button",
-	}}
-/>
+	}} />

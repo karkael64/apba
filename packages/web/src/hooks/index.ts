@@ -1,12 +1,9 @@
 import cookie from 'cookie';
-import loadSession from './session';
-
+// import setLocalSession from './session';
 import type { GetSession, Handle } from '@sveltejs/kit';
-import type { UserSession, SessionRedirect, Locals, Env } from '../types/hooks';
+import type { Locals, Env } from '../types/hooks';
 
-const isRedirect = (el: UserSession | SessionRedirect): el is SessionRedirect => 'redirect' in el;
-
-const getEnv = (): Env => {
+const env: Env = (() => {
 	const ptl = import.meta.env.VITE_PROTOCOL;
 	const host = import.meta.env.VITE_SSO_HOST;
 
@@ -21,7 +18,7 @@ const getEnv = (): Env => {
 				: ('http' as const),
 		SSO_HOST: host
 	};
-};
+})();
 
 export const handle: Handle<Locals> = async ({ request, resolve }) => {
 	// @mandatory
@@ -30,26 +27,20 @@ export const handle: Handle<Locals> = async ({ request, resolve }) => {
 	}
 
 	// set locals
-	const session = await loadSession(request, getEnv());
+	request.locals = { env } as Locals;
 
-	if (isRedirect(session)) {
-		return {
-			status: 302,
-			headers: {
-				location: session.redirect
-			}
-		};
-	}
-
-	request.locals.session = session;
+	// const loginRedirect = setLocalSession(request);
+	// if (loginRedirect) {
+	// 	return loginRedirect;
+	// }
 
 	// run request
 	const response = await resolve(request);
 
 	// set token
 	const cookies = cookie.parse(request.headers.cookie || '');
-	if (!cookies.token) {
-		response.headers['set-cookie'] = `token=${session.token}; Path=/; HttpOnly`;
+	if (!cookies.token && request.locals.session?.token) {
+		response.headers['set-cookie'] = `token=${request.locals.session.token}; Path=/; HttpOnly`;
 	}
 
 	return response;

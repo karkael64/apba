@@ -1,4 +1,4 @@
-import type { Env, Req, SessionRedirect, UserSession } from '../types/hooks';
+import type { Req, SessionRedirect, UserSession } from '../types/hooks';
 
 const readCookies = (cookies: string) => {
 	const chunks = cookies.split(/;\s+/);
@@ -77,9 +77,9 @@ const queryRemoveSession = (query: URLSearchParams) => {
 /**
  * Create session object. Verify user is logged in, else redirect him to login page.
  */
-async function session(req: Req, env: Env): Promise<UserSession | SessionRedirect> {
+async function getSession(req: Req): Promise<UserSession | SessionRedirect> {
 	const { token } = readCookies(req.headers.cookie ?? '');
-	const { PROTOCOL: ptl, SSO_HOST: host } = env;
+	const { PROTOCOL: ptl, SSO_HOST: host } = req.locals.env;
 
 	if (token) {
 		const user = await fetchToken(host, token);
@@ -106,9 +106,21 @@ async function session(req: Req, env: Env): Promise<UserSession | SessionRedirec
 	};
 }
 
-export default async function (req: Req, env: Env) {
+const isRedirect = (el: UserSession | SessionRedirect): el is SessionRedirect => 'redirect' in el;
+
+export default async function (req: Req) {
 	try {
-		return await session(req, env);
+		const session = await getSession(req);
+		if (isRedirect(session)) {
+			return {
+				status: 302,
+				headers: {
+					location: session.redirect
+				}
+			};
+		}
+		req.locals.session = session;
+		return null;
 	} catch (e) {
 		throw new Error('Error at authentication');
 	}

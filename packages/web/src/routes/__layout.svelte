@@ -1,15 +1,18 @@
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
+	import { Lang, Color, Button } from '$lib/components';
 	import '../app.css';
 </script>
 
+<Lang />
+<Color />
 <Header />
-
 <main>
 	<slot />
 </main>
-
 <footer>
+	<Button color="primary">yeah</Button>
+	<Button>noh</Button>
 	<p>
 		visit
 		<a href="https://kit.svelte.dev">kit.svelte.dev</a>

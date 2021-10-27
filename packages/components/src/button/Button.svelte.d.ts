@@ -2,12 +2,14 @@ import type { SvelteComponentTyped } from "svelte";
 
 declare class Button extends SvelteComponentTyped<
 	{
-		primary?: boolean;
-		size?: "small" | "medium" | "large";
-		label: string;
+		color?: "primary" | "secondary";
+		shape?: "square" | "round" | "circle";
 	},
 	{
 		click: Event;
+	},
+	{
+		default: string | SvelteComponentTyped;
 	}
 > {}
 
