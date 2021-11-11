@@ -1,4 +1,6 @@
 <script>
+	import ImageLoader from "../../molecule/imageLoader/ImageLoader.svelte";
+
 	import SwitchColor from "../../molecule/switchColor/SwitchColor.svelte";
 </script>
 
@@ -6,7 +8,10 @@
 	<nav>
 		<ul>
 			<li>
-				<a href="/">Accueil</a>
+				<ImageLoader src="apba-ghosts.svg" width={60} height={60} alt="Icon of APBA" />
+			</li>
+			<li>
+				<a href="/">APBA - Accueil</a>
 			</li>
 			<li>
 				<a href="/agenda">Agenda</a>
@@ -43,8 +48,10 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background: var(--bonus);
-		color: var(--minus);
+		height: 80px;
+		background: var(--pansyPurple);
+		color: var(--positive);
+		font-weight: 600;
 	}
 
 	ul {
@@ -70,8 +77,6 @@
 	a:focus-visible,
 	a:visited {
 		display: inline-block;
-		color: inherit;
-		text-decoration: none;
 	}
 
 	li > * {

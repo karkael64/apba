@@ -16,7 +16,9 @@
 
 	onMount(() => {
 		colorScheme.subscribe((value) => {
-			console.log(value);
+			if (!el) {
+				return;
+			}
 			if (index !== undefined) {
 				el.sheet.deleteRule(index);
 			}

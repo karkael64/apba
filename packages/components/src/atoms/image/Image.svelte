@@ -30,6 +30,9 @@
 		line-height: 1em;
 		opacity: 0;
 		transition: opacity 600ms ease-out;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 	img.loaded {
 		opacity: 1;

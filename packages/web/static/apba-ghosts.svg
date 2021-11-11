@@ -1,0 +1,17 @@
+<svg width="350" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250">
+  <defs>
+    <g id="ghost">
+      <path stroke="none" fill="#fff" d="M 20 10 Q 50 100 130 50, 60 120 70 220, 10 120 20 10 Z" />
+      <circle stroke="none" fill="#fff" cx="75" cy="30" r="22" />
+    </g>
+  </defs>
+  <g transform="translate(10 10)">
+    <use href="#ghost" />
+  </g>
+  <g transform="translate(140 55)">
+    <use href="#ghost" transform="scale(.8) rotate(35)" />
+  </g>
+  <g transform="translate(200 150)">
+    <use href="#ghost" transform="scale(.6) rotate(70)" />
+  </g>
+</svg>

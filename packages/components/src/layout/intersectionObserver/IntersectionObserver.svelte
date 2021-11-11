@@ -22,7 +22,6 @@
 
 		const handler = () => {
 			const bcr = container.getBoundingClientRect();
-			console.log(bcr);
 			intersecting = bcr.bottom > 0 && bcr.right > 0 && bcr.top < window.innerHeight && bcr.left < window.innerWidth;
 			if (intersecting && once) {
 				window.removeEventListener("scroll", handler);
