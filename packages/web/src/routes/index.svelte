@@ -12,7 +12,6 @@
 </svelte:head>
 
 <section>
-	<SwitchColor />
 	<h1>
 		<div class="welcome">
 			<picture>

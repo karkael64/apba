@@ -7,10 +7,6 @@
 
 	export let defaultColorScheme: "light" | "dark" | undefined;
 
-	if (defaultColorScheme) {
-		colorScheme.set(defaultColorScheme);
-	}
-
 	let el: HTMLStyleElement;
 
 	const colorsToCssVar = (obj: Record<string, string>) =>
@@ -20,13 +16,21 @@
 
 	onMount(() => {
 		colorScheme.subscribe((value) => {
+			console.log(value);
 			if (index !== undefined) {
 				el.sheet.deleteRule(index);
 			}
 			if (value === "light") {
 				index = el.sheet.insertRule(`:root {${colorsToCssVar(light)}\n}`);
-			} else {
+				localStorage.setItem("color-scheme", "light");
+			} else if (value === "dark") {
 				index = el.sheet.insertRule(`:root {${colorsToCssVar(dark)}\n}`);
+				localStorage.setItem("color-scheme", "dark");
+			} else {
+				const localStorageColorScheme = localStorage.getItem("color-scheme") as "light" | "dark";
+				const userPreferColorScheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+				const setColorScheme = defaultColorScheme || localStorageColorScheme || userPreferColorScheme;
+				colorScheme.set(setColorScheme === "light" ? "light" : "dark");
 			}
 		});
 	});

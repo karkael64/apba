@@ -1,12 +1,11 @@
 <script lang="ts">
-	import Header from '$lib/header/Header.svelte';
-	import { Lang, Color, Button } from '$lib/components';
+	import { Lang, Color, Button, Nav } from '$lib/components';
 	import '../app.css';
 </script>
 
 <Lang />
 <Color />
-<Header />
+<Nav />
 <main>
 	<slot />
 </main>
