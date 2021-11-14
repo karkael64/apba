@@ -6,6 +6,7 @@ declare class ImageLoader extends SvelteComponentTyped<{
 	width?: string | number;
 	height?: string | number;
 	transitionDuration?: number;
+	filter?: string;
 }> {}
 
 export default ImageLoader;

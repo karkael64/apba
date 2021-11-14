@@ -4,15 +4,18 @@
 	import ImageLoader from "../../molecule/imageLoader/ImageLoader.svelte";
 
 	export let backgroundImage: string;
+	export let backgroundFilter: string;
 	export let height: string;
 
 	$: styles = { height } as CSSObject;
 </script>
 
 <section style={objectToStyleString(styles)}>
-	<div class="covered">
-		<ImageLoader src={backgroundImage} alt="Fond de section" height={height || "100vh"} />
-	</div>
+	{#if backgroundImage}
+		<div class="covered">
+			<ImageLoader src={backgroundImage} alt="Fond de section" height={height || "100vh"} filter={backgroundFilter} />
+		</div>
+	{/if}
 	<slot />
 </section>
 

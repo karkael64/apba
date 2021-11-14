@@ -12,8 +12,8 @@ export const colorScheme = (mode) => {
 		mode === "dark"
 			? `
   :root { ${colorsToCssVar(dark)} }
-  body { background: var(--bonus); }`
+  body { background: var(--negative); color: var(--positive); }`
 			: `
   :root { ${colorsToCssVar(light)} }
-  body { background: var(--bonus) }`;
+  body { background: var(--negative); color: var(--positive); }`;
 };

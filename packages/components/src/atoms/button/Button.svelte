@@ -1,18 +1,23 @@
 <script>
 	export let color = "secondary";
 	export let shape = "round";
+	export let href;
 </script>
 
-<button type="button" class={`storybook-button ${color} ${shape}`} on:click>
-	<slot />
-</button>
+{#if href}
+	<a {href} type="button" class={`button ${color} ${shape}`}><slot /></a>
+{:else}
+	<button type="button" class={`button ${color} ${shape}`} on:click>
+		<slot />
+	</button>
+{/if}
 
 <style>
-	.storybook-button {
+	.button {
 		display: flex;
-		display: inline-block;
 		justify-content: center;
 		align-items: center;
+		width: fit-content;
 
 		padding: 0 1em;
 		border: 0;
@@ -29,7 +34,7 @@
 		transition: all 0.2s;
 	}
 
-	.storybook-button:hover {
+	.button:hover {
 		box-shadow: inset 0 0 1.2em 0 #8888;
 	}
 

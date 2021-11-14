@@ -4,6 +4,7 @@
 	export let src;
 	export let alt;
 	export let transitionDuration = 0.6;
+	export let filter;
 
 	import { onMount } from "svelte";
 
@@ -23,7 +24,7 @@
 	loading="lazy"
 	class:loaded
 	bind:this={thisImage}
-	style={objectToStyleString({ transitionDuration: `${transitionDuration}s` })} />
+	style={objectToStyleString({ transitionDuration: `${transitionDuration}s`, filter })} />
 
 <style>
 	img {

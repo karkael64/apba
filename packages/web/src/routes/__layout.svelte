@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Lang, Color, Button, Nav } from '$lib/components';
+	import { Lang, Color, Button, Nav, Footer } from '$lib/components';
 	import '../app.css';
 </script>
 
@@ -9,11 +9,15 @@
 <main>
 	<slot />
 </main>
+<Footer />
 
 <style>
 	main {
-		flex: 1;
 		display: flex;
 		flex-direction: column;
+		flex: 1;
+		justify-content: center;
+		align-items: center;
+		min-height: calc(100vh - 281px);
 	}
 </style>

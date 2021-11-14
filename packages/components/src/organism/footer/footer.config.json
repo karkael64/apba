@@ -1,0 +1,50 @@
+[
+	{
+		"name": "Accueil",
+		"href": "/"
+	},
+	{
+		"name": "Agenda des activités",
+		"href": "/agenda"
+	},
+	{
+		"name": "Contactez-nous",
+		"href": "/contact"
+	},
+	{
+		"name": "Actions pour les parents d'élèves",
+		"href": "/parents-eleves"
+	},
+	{
+		"name": "Actions pour le Bois l'Abbé",
+		"href": "/quartier"
+	},
+	{
+		"name": "Activités pour les adhérants",
+		"href": "/activites"
+	},
+	{
+		"name": "Solidarités",
+		"href": "/solidarites"
+	},
+	{
+		"name": "Paramètres de votre compte",
+		"href": "/profile"
+	},
+	{
+		"name": "Identifiez-vous",
+		"href": "/login"
+	},
+	{
+		"name": "Déconnexion",
+		"href": "/logout"
+	},
+	{
+		"name": "Mentions légales",
+		"href": "/cgu"
+	},
+	{
+		"name": "Vie privée & navigation",
+		"href": "/privacy"
+	}
+]
