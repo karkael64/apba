@@ -1,16 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { client, User } from '$lib/db';
-
-const objectPick = <T extends Record<string, unknown>, K extends string = keyof T & string>(
-	object: T,
-	keys: K[]
-) =>
-	keys.reduce((acc, key) => {
-		if (key in object) {
-			acc[key] = object[key];
-		}
-		return acc;
-	}, {} as Pick<T, K>);
+import { objectPick } from '$lib/hooks';
 
 const userPickAttributes = (object: User & Record<string, unknown>): Omit<User, 'id'> =>
 	objectPick(object, ['email', 'levelId', 'name']);

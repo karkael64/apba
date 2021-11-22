@@ -3,8 +3,8 @@
 </script>
 
 <footer>
-	<h3>Plan du site :</h3>
 	<nav>
+		<h3>Plan du site :</h3>
 		<ul>
 			{#each config as line}
 				<li>
@@ -13,20 +13,25 @@
 			{/each}
 		</ul>
 	</nav>
-	<center>
+	<p>
 		Tout droit réservé, voir les <a class="bottom" href="/cgu">mentions légales</a>, voir et modifier votre
 		<a class="bottom" href="/privacy">politique de gestion de vos informations et de vos cookies</a>.
-	</center>
+	</p>
 </footer>
 
 <style>
 	footer {
 		padding: 1em 3em;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 	ul {
 		column-count: 3;
 		column-gap: 4em;
 		column-rule: 1px solid var(--minus);
+		width: 60em;
 	}
 
 	a.bottom {

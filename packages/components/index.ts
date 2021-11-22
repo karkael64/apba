@@ -1,10 +1,5 @@
-export { default as Button } from "./src/atoms/button/Button.svelte";
-export { default as Buttons } from "./src/atoms/buttons/Buttons.svelte";
-export { default as Color } from "./src/provider/color/Color.svelte";
-export { default as FullSection } from "./src/layout/fullSection/FullSection.svelte";
-export { default as Footer } from "./src/organism/footer/Footer.svelte";
-export { default as ImageLoader } from "./src/molecule/imageLoader/ImageLoader.svelte";
-export { default as Lang } from "./src/provider/lang/Lang.svelte";
-export { default as Nav } from "./src/organism/nav/Nav.svelte";
-export { default as SwitchColor } from "./src/molecule/switchColor/SwitchColor.svelte";
-export { default as ThumbDefinition } from "./src/layout/thumbDefinition/ThumbDefinition.svelte";
+export * from "./src/atoms";
+export * from "./src/layout";
+export * from "./src/molecule";
+export * from "./src/organism";
+export * from "./src/provider";
