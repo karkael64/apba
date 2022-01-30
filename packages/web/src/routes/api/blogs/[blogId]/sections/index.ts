@@ -9,11 +9,13 @@ export const get: RequestHandler<never, never, { blogSections: BlogSection[] }> 
 });
 
 export const post: RequestHandler<never, Partial<BlogSection>, string> = async ({
-	params: { blogId: rawBlogId },
+	params: { blogId: slug },
 	request
 }) => {
-	const blogId = parseInt(rawBlogId);
-	const blog = await client.blog.findUnique({ where: { id: blogId } });
+	const blogId = parseInt(slug);
+	const blog = isNaN(blogId)
+		? await client.blog.findFirst({ where: { slug } })
+		: await client.blog.findUnique({ where: { id: blogId } });
 	if (!blog) {
 		return { status: 400, body: `Blog id=${blogId} is not reachable` };
 	}
@@ -30,9 +32,9 @@ export const post: RequestHandler<never, Partial<BlogSection>, string> = async (
 		};
 	}
 	const blogSection = await client.blogSection.create({
-		data: { blogId, order, model, json }
+		data: { blogId: blog.id, order, model, json }
 	});
 	if (blogSection) {
-		return { status: 302, headers: { location: `./${blogSection.id}` } };
+		return { status: 302, headers: { location: `/api/blogs/${slug}` } };
 	}
 };

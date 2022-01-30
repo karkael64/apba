@@ -1,5 +1,7 @@
 <script context="module" lang="ts">
-	import { SectionSplash, SectionThumbs } from 'components';
+import { SectionSplash, SectionThumbs } from "components";
+
+
 	export const prerender = true;
 </script>
 

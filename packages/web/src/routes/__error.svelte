@@ -1,5 +1,7 @@
 <script context="module" lang="ts">
-	export function load({ error, status }) {
+	import type { ErrorLoad } from '@sveltejs/kit';
+	export const load: ErrorLoad = ({ error, status }) => {
+		console.log({ error })
 		if (status === 404) {
 			return { props: { title: "La page n'existe pas" } };
 		}

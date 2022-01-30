@@ -1,18 +1,31 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { client, Blog } from '$lib/db';
+import { client, Blog, BlogSection } from '$lib/db';
 import { objectPick } from '$lib/hooks';
 
 const blogPickAttributes = (object: Blog & Record<string, unknown>): Omit<Blog, 'id'> =>
 	objectPick(object, ['authorId', 'slug', 'title', 'body']);
 
-export const get: RequestHandler<never, never, { blog: Blog }> = async ({
-	params: { blogId: id }
-}) => ({
-	body: { blog: await client.blog.findUnique({ where: { id: parseInt(id) } }) }
-});
+export const get: RequestHandler<never, { blog: Blog & { sections: BlogSection[] } }> = async ({
+	params: { blogId: slug }
+}) => {
+	const id = parseInt(slug);
+	if (isNaN(id)) {
+		return {
+			body: {
+				blog: await client.blog.findFirst({ where: { slug }, include: { sections: true } })
+			}
+		};
+	}
+
+	return {
+		body: {
+			blog: await client.blog.findUnique({ where: { id }, include: { sections: true } })
+		}
+	};
+};
 
 export const patch: RequestHandler<never, Partial<Blog>, { blog: Blog }> = async ({
-	params: { blogId: id },
+	params: { slug: id },
 	request
 }) => ({
 	body: {
@@ -24,7 +37,7 @@ export const patch: RequestHandler<never, Partial<Blog>, { blog: Blog }> = async
 });
 
 export const del: RequestHandler<never, never, { blog: Blog }> = async ({
-	params: { blogId: id }
+	params: { slug: id }
 }) => ({
 	body: { blog: await client.blog.delete({ where: { id: parseInt(id) } }) }
 });

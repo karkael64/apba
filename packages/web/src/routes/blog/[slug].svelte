@@ -1,17 +1,27 @@
 <script context="module" lang="ts">
-	import { Blog, client } from '$lib/db';
 	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({ params: { slug } }) => {
-		const blog = await client.blog.findFirst({ where: { slug } });
+	export const load: Load = async ({ params: { slug }, fetch }) => {
+		const { blog } = await (await fetch(`/api/blogs/${slug}`)).json();
 		return { props: { blog } };
 	};
 </script>
 
 <script lang="ts">
-	export let blog: Blog;
+	import type { Blog, BlogSection } from '$lib/db';
+	import { SectionThumbs, SectionSplash } from 'components';
+	export let blog: null | Blog & { sections: BlogSection[] };
 </script>
 
 <div>
-	<h3>{blog.title}</h3>
-	<p>{blog.body}</p>
+	<h3>{blog?.title}</h3>
+	<p>{blog?.body}</p>
+
 </div>
+
+{#each blog?.sections as section (section.id)}
+	{#if section.model === "SectionThumbs"}
+		<SectionThumbs {...JSON.parse(section.json)} />
+	{:else if section.model === "SectionSplash"}
+		<SectionSplash {...JSON.parse(section.json)} />
+	{/if}
+{/each}

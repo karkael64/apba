@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { Lang, Color, Button, Nav, Footer } from '$lib/components';
+	import { Color, Nav, Footer } from '$lib/components';
 	import '../app.css';
 </script>
 
-<Lang />
 <Color />
 <Nav />
 <main>
