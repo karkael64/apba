@@ -8,7 +8,7 @@
 			<a {href} type="button" class={`button ${color}`}>{text}</a>
 		{:else}
 			<button type="button" class={`button ${color}`} on:click>
-				<slot />
+				{text}
 			</button>
 		{/if}
 	{/each}
@@ -45,7 +45,7 @@
 	}
 
 	.button:hover {
-		box-shadow: inset 0 0 1.2em 0 #8888;
+		box-shadow: inset 0 0 1.2em 0 #8882;
 	}
 
 	.primary {

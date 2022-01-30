@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { objectToStyleString } from "../../../common/style";
+	import { objectToStyleString } from "../../common/style";
 
 	import { onMount } from "svelte";
 	export let once = false;

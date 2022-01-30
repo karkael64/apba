@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
-	import { dark, light } from "../../../common/colors";
-	import { objectReduce } from "../../../common/object";
+	import { dark, light } from "../../common/colors";
+	import { objectReduce } from "../../common/object";
 	import { colorScheme } from "./colorScheme";
 
 	export let defaultColorScheme: "light" | "dark" | undefined;

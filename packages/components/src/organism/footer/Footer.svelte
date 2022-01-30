@@ -35,7 +35,7 @@
 	}
 
 	a.bottom {
-		color: var(--pansyPurple);
+		color: var(--sinopia);
 	}
 	a.bottom:hover {
 		border-bottom: 1px solid currentColor;

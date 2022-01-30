@@ -88,9 +88,11 @@ async function getSession(req: Req): Promise<UserSession | SessionRedirect> {
 		}
 	}
 
-	const session_state = req.query.get('session_state');
-	const code = req.query.get('code');
-	const returns_to = `${ptl}://${req.host}${req.path}${queryRemoveSession(req.query)}`;
+	const session_state = req.url.searchParams.get('session_state');
+	const code = req.url.searchParams.get('code');
+	const returns_to = `${ptl}://${req.url.host}${req.url.pathname}${queryRemoveSession(
+		req.url.searchParams
+	)}`;
 
 	if (session_state && code) {
 		const user = await fetchNewToken(host, session_state, code, returns_to);

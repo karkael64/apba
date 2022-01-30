@@ -24,6 +24,7 @@
 		"checkJs": true,
 		"paths": {
 			"$lib/*": ["packages/web/src/lib/*"],
+			"prisma": ["packages/prisma/index.ts"],
 			"components": ["packages/components/index.ts"]
 		}
 	}

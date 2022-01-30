@@ -1,5 +1,5 @@
 <script>
-	import { objectToStyleString } from "../../../common/style";
+	import { objectToStyleString } from "../../common/style";
 
 	export let src;
 	export let alt;

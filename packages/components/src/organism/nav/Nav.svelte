@@ -1,7 +1,5 @@
 <script>
-	import ImageLoader from "../../molecule/imageLoader/ImageLoader.svelte";
-
-	import SwitchColor from "../../molecule/switchColor/SwitchColor.svelte";
+	import { ImageLoader, SwitchColor } from "../../molecule";
 </script>
 
 <header>
@@ -18,12 +16,6 @@
 			</li>
 			<li>
 				<a href="/contact">Contact</a>
-			</li>
-			<li>
-				<a href="/cgu">Mentions légales</a>
-			</li>
-			<li>
-				<a href="/privacy">Vie privée</a>
 			</li>
 		</ul>
 		<ul>
@@ -49,8 +41,8 @@
 		justify-content: space-between;
 		align-items: center;
 		height: 80px;
-		background: var(--pansyPurple);
-		color: var(--positive);
+		background: var(--sinopia);
+		color: white;
 		font-weight: 600;
 	}
 

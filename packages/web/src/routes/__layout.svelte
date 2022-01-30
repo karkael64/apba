@@ -18,6 +18,6 @@
 		flex: 1;
 		justify-content: center;
 		align-items: center;
-		min-height: calc(100vh - 281px);
+		min-height: calc(100vh - 314px);
 	}
 </style>

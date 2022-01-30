@@ -66,7 +66,7 @@
 		{ href: '/activites', text: 'Bien-être et santé', color: 'secondary' },
 		{ href: '/solidarites', text: 'Solidarités', color: 'primary' }
 	]}
-	className="left"
+	variant="left"
 />
 
 <SectionThumbs

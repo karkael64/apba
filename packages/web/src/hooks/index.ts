@@ -22,8 +22,8 @@ const env: Env = (() => {
 
 export const handle: Handle<Locals> = async ({ request, resolve }) => {
 	// @mandatory
-	if (request.query.has('_method')) {
-		request.method = request.query.get('_method').toUpperCase();
+	if (request.url.searchParams.has('_method')) {
+		request.method = request.url.searchParams.get('_method').toUpperCase();
 	}
 
 	// set locals

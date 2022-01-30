@@ -5,7 +5,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../../node_modules/.prisma/client"
+  output   = "./client"
 }
 
 model Post {
@@ -47,6 +47,7 @@ model Blog {
 
 model BlogSection {
   id     Int    @id @default(autoincrement())
+  order  Int
   model  String
   json   String
   blog   Blog   @relation(fields: [blogId], references: [id])
