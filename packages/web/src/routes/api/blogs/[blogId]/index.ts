@@ -13,12 +13,12 @@ export const get: RequestHandler<never, never, { blog: Blog }> = async ({
 
 export const patch: RequestHandler<never, Partial<Blog>, { blog: Blog }> = async ({
 	params: { blogId: id },
-	body: data
+	request
 }) => ({
 	body: {
 		blog: await client.blog.update({
 			where: { id: parseInt(id) },
-			data: blogPickAttributes(data as Blog)
+			data: blogPickAttributes((await request.json()) as Blog)
 		})
 	}
 });

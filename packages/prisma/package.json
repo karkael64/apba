@@ -2,9 +2,7 @@
 	"name": "prisma",
 	"version": "0.0.1",
 	"license": "MIT",
-	"main": "client/index.js",
-	"types": "index.ts",
-	"typing": "index.ts",
+	"main": "index.ts",
 	"engines": {
 		"node": ">=12.2.0"
 	},

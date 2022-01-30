@@ -20,14 +20,9 @@ const env: Env = (() => {
 	};
 })();
 
-export const handle: Handle<Locals> = async ({ request, resolve }) => {
-	// @mandatory
-	if (request.url.searchParams.has('_method')) {
-		request.method = request.url.searchParams.get('_method').toUpperCase();
-	}
-
+export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	// set locals
-	request.locals = { env } as Locals;
+	event.locals = { env } as Locals;
 
 	// const loginRedirect = setLocalSession(request);
 	// if (loginRedirect) {
@@ -35,12 +30,12 @@ export const handle: Handle<Locals> = async ({ request, resolve }) => {
 	// }
 
 	// run request
-	const response = await resolve(request);
+	const response = await resolve(event);
 
 	// set token
-	const cookies = cookie.parse(request.headers.cookie || '');
-	if (!cookies.token && request.locals.session?.token) {
-		response.headers['set-cookie'] = `token=${request.locals.session.token}; Path=/; HttpOnly`;
+	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+	if (!cookies.token && event.locals.session?.token) {
+		response.headers['set-cookie'] = `token=${event.locals.session.token}; Path=/; HttpOnly`;
 	}
 
 	return response;

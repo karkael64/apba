@@ -11,14 +11,17 @@ export const patch: RequestHandler<
 	never,
 	Partial<BlogSection>,
 	{ blogSection: BlogSection }
-> = async ({ params: { blogSectionId }, body: { order, model, json } }) => ({
-	body: {
-		blogSection: await client.blogSection.update({
-			where: { id: parseInt(blogSectionId) },
-			data: { order, model, json }
-		})
-	}
-});
+> = async ({ params: { blogSectionId }, request }) => {
+	const { order, model, json } = await request.json();
+	return {
+		body: {
+			blogSection: await client.blogSection.update({
+				where: { id: parseInt(blogSectionId) },
+				data: { order, model, json }
+			})
+		}
+	};
+};
 
 export const del: RequestHandler<never, never, { blog: BlogSection }> = async ({
 	params: { blogSectionId }

@@ -11,12 +11,12 @@ export const get: RequestHandler<never, never, { user: User }> = async ({ params
 
 export const patch: RequestHandler<never, Partial<User>, { user: User }> = async ({
 	params: { uid },
-	body: data
+	request
 }) => ({
 	body: {
 		user: await client.user.update({
 			where: { id: parseInt(uid) },
-			data: userPickAttributes(data as User)
+			data: userPickAttributes((await request.json()) as User)
 		})
 	}
 });

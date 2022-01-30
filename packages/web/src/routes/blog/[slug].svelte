@@ -1,11 +1,7 @@
 <script context="module" lang="ts">
 	import { Blog, client } from '$lib/db';
 	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({
-		page: {
-			params: { slug }
-		}
-	}) => {
+	export const load: Load = async ({ params: { slug } }) => {
 		const blog = await client.blog.findFirst({ where: { slug } });
 		return { props: { blog } };
 	};

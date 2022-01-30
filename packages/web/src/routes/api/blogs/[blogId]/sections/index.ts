@@ -1,6 +1,5 @@
-import { client } from '$lib/db';
+import { client, BlogSection } from '$lib/db';
 import { isModelName, modelErrors } from 'components';
-import type { BlogSection } from '.prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const get: RequestHandler<never, never, { blogSections: BlogSection[] }> = async ({
@@ -11,13 +10,14 @@ export const get: RequestHandler<never, never, { blogSections: BlogSection[] }> 
 
 export const post: RequestHandler<never, Partial<BlogSection>, string> = async ({
 	params: { blogId: rawBlogId },
-	body: { order, model, json: jsonRaw }
+	request
 }) => {
 	const blogId = parseInt(rawBlogId);
 	const blog = await client.blog.findUnique({ where: { id: blogId } });
 	if (!blog) {
 		return { status: 400, body: `Blog id=${blogId} is not reachable` };
 	}
+	const { order, model, json: jsonRaw } = await request.json();
 	if (!isModelName(model)) {
 		return { status: 400, body: `Model name=${model} is not reachable` };
 	}

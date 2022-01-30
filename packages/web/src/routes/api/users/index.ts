@@ -5,13 +5,12 @@ export const get: RequestHandler<never, never, { users: User[] }> = async () => 
 	body: { users: await client.user.findMany() }
 });
 
-export const post: RequestHandler<never, { user: User }> = async ({
-	headers: { cookie },
-	body: {
+export const post: RequestHandler<never, { user: User }> = async ({ request }) => {
+	const {
 		user: { email, levelId, name }
-	}
-}) => {
-	console.log({ cookie });
+	} = await request.json();
+	const cookie = request.headers.get('cookie');
+
 	if (!cookie) {
 		return { status: 403 };
 	}
