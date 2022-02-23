@@ -1,4 +1,4 @@
-import { dark, light } from "../common/colors";
+import { dark, light } from "../src/common/colors";
 
 export const objectReduce = (obj, reducer, init) =>
 	Object.keys(obj).reduce((acc, key) => reducer(acc, obj[key], key, obj), init);

@@ -22,5 +22,4 @@
 </Template>
 
 <Story name="Single" args={{ count: 1 }} />
-
 <Story name="Twelve" args={{ count: 12 }} />

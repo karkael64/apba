@@ -1,7 +1,5 @@
 <script context="module" lang="ts">
-import { SectionSplash, SectionThumbs } from "components";
-
-
+	import { SectionSplash, SectionThumbs } from "components";
 	export const prerender = true;
 </script>
 
@@ -10,10 +8,10 @@ import { SectionSplash, SectionThumbs } from "components";
 </svelte:head>
 
 <SectionSplash
-	backgroundImages={['index.jpg']}
+	backgroundImages={['/temp/index.jpg']}
 	height="80vh"
 	buttonList={[
-		{ href: '/parents-eleves', text: "Vous êtes un parent du Bois l'Abbé", color: 'primary' },
+		{ href: '/blog/parents', text: "Vous êtes un parent du Bois l'Abbé", color: 'primary' },
 		{ href: '/login', text: 'Vous êtes déjà inscrit', color: 'secondary' }
 	]}
 	body={`
@@ -27,11 +25,11 @@ import { SectionSplash, SectionThumbs } from "components";
 <SectionThumbs
 	thumbs={[
 		{
-			pictureUrl: 'school8.jpg',
+			pictureUrl: '/temp/school8.jpg',
 			pictureAlt: 'salle de classe avec des élèves',
-			buttonHref: '/parents-eleves',
+			buttonHref: '/blog/parents',
 			body: `
-		<h2>Parents d'élèves</h2>
+		<h2>Parents</h2>
 		<p>
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam sapiente omnis, asperiores esse
 			obcaecati voluptate ut unde dolorum, non perspiciatis totam autem laborum sequi mollitia quia
@@ -44,7 +42,7 @@ import { SectionSplash, SectionThumbs } from "components";
 		</p>`
 		},
 		{
-			pictureUrl: 'bois-labbe4.jpg',
+			pictureUrl: '/temp/bois-labbe4.jpg',
 			pictureAlt: "bâtiment du bois l'abbé",
 			buttonHref: '/quartier',
 			buttonColor: 'secondary',
@@ -61,7 +59,7 @@ import { SectionSplash, SectionThumbs } from "components";
 
 <SectionSplash
 	height="80vh"
-	backgroundImages={['cook.jpg', 'sewing2.jpg']}
+	backgroundImages={['/temp/cook.jpg', '/temp/sewing2.jpg']}
 	body={`<p>Voir toutes les activités d'APBA</p>`}
 	buttonList={[
 		{ href: '/quartier', text: 'Convivialité de quartier', color: 'primary' },
@@ -75,7 +73,7 @@ import { SectionSplash, SectionThumbs } from "components";
 	thumbs={[
 		{
 			pictureAlt: 'plat sain végétarien',
-			pictureUrl: 'recipe.jpg',
+			pictureUrl: '/temp/recipe.jpg',
 			buttonHref: '/activites',
 			body: `
 		<h2>Diététique et bien-être</h2>
@@ -87,7 +85,7 @@ import { SectionSplash, SectionThumbs } from "components";
 		},
 		{
 			pictureAlt: 'famille caline',
-			pictureUrl: 'cook5.jpg',
+			pictureUrl: '/temp/cook5.jpg',
 			buttonHref: '/solidarites',
 			buttonColor: 'secondary',
 			body: `

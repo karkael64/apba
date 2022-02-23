@@ -6,7 +6,7 @@
 	<nav>
 		<ul>
 			<li>
-				<ImageLoader src="/apba-ghosts.svg" width={60} height={60} alt="Icon of APBA" />
+				<ImageLoader src="/logo/apba-ghosts.svg" width={60} height={60} alt="Icon of APBA" />
 			</li>
 			<li>
 				<a href="/">APBA - Accueil</a>
