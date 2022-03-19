@@ -44,7 +44,7 @@
 		{
 			pictureUrl: '/temp/bois-labbe4.jpg',
 			pictureAlt: "bâtiment du bois l'abbé",
-			buttonHref: '/quartier',
+			buttonHref: '/blog/quartier',
 			buttonColor: 'secondary',
 			body: `
 		<h2>Habitants du Bois l'Abbé</h2>
@@ -62,9 +62,9 @@
 	backgroundImages={['/temp/cook.jpg', '/temp/sewing2.jpg']}
 	body={`<p>Voir toutes les activités d'APBA</p>`}
 	buttonList={[
-		{ href: '/quartier', text: 'Convivialité de quartier', color: 'primary' },
-		{ href: '/activites', text: 'Bien-être et santé', color: 'secondary' },
-		{ href: '/solidarites', text: 'Solidarités', color: 'primary' }
+		{ href: '/blog/quartier', text: 'Convivialité de quartier', color: 'primary' },
+		{ href: '/blog/activites', text: 'Bien-être et santé', color: 'secondary' },
+		{ href: '/blog/solidarites', text: 'Solidarités', color: 'primary' }
 	]}
 	variant="left"
 />
@@ -74,7 +74,7 @@
 		{
 			pictureAlt: 'plat sain végétarien',
 			pictureUrl: '/temp/recipe.jpg',
-			buttonHref: '/activites',
+			buttonHref: '/blog/activites',
 			body: `
 		<h2>Diététique et bien-être</h2>
 		<p>
@@ -86,7 +86,7 @@
 		{
 			pictureAlt: 'famille caline',
 			pictureUrl: '/temp/cook5.jpg',
-			buttonHref: '/solidarites',
+			buttonHref: '/blog/solidarites',
 			buttonColor: 'secondary',
 			body: `
 		<h2>Activités en famille</h2>

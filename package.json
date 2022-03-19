@@ -18,7 +18,8 @@
 		"postinstall": "yarn @psm generate",
 		"build:db": "yarn @psm push && yarn @psm seed",
 		"start": "yarn @web dev",
-		"sb": "yarn @cmp storybook"
+		"sb": "yarn @cmp storybook",
+		"build": "yarn @web build"
 	},
 	"devDependencies": {
 		"prettier-plugin-svelte": "^2.4.0"

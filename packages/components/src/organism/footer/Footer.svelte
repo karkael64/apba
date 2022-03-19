@@ -1,5 +1,5 @@
 <script>
-	import config from "./footer.config.json";
+	import { default as config } from "./footer.config.json";
 </script>
 
 <footer>
