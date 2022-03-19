@@ -1,10 +1,16 @@
 <script lang="ts">
   import { Carrousel, CarrouselPicture, FullSection } from "components";
-  const pictures: CarrouselPicture[] = [{ alt: "", src: "/parents/famille.jpg" }];
-  console.log({ pictures });
+  const pictures: CarrouselPicture[] = [
+    { alt: "", src: "/parents/famille.jpg" },
+    { alt: "", src: "/equipe/benevoles.jpg" },
+    { alt: "", src: "/decouvrir/marche1.jpg" },
+    { alt: "", src: "/decouvrir/marche2.jpg" },
+    { alt: "", src: "/decouvrir/marche3.jpg" },
+    { alt: "", src: "/decouvrir/marche4.jpg" },
+  ];
 </script>
 
-<FullSection>
+<FullSection height="60vh">
   <h1>
     Parents du Bois l'Abbé
   </h1>
@@ -36,4 +42,4 @@
   </p>
 </FullSection>
 
-<Carrousel height="100%" duration={2000} {pictures} />
+<Carrousel height="60vh" duration={2000} {pictures} />

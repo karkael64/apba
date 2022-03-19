@@ -13,7 +13,8 @@
 		width: { defaultValue: 640, type: "number" },
 		height: { defaultValue: 480, type: "number" },
 		transitionDuration: { defaultValue: 0.6, type: "number" },
-	}} />
+	}}
+	component={ImageLoader} />
 
 <Template let:args={{ count, width, height, transitionDuration }}>
 	{#each listImages(count, width, height) as src}

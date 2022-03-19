@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
-	import Carrousel, { CarrouselPicture } from "./Carrousel.svelte";
+	import type { CarrouselPicture } from "./Carrousel.svelte";
+	import Carrousel from "./Carrousel.svelte";
 	import faker from "faker";
 
 	const fakePicture = (): CarrouselPicture => ({
@@ -8,13 +9,18 @@
 		src: faker.image.nightlife(),
 	});
 
-	const fakePictures = () => Array.from({ length: 3 }, fakePicture);
+	const fakePictures = (length = 3) => Array.from({ length }, fakePicture);
 </script>
 
-<Meta title="Molecule/Carrousel" component={Carrousel} />
+<Meta
+	title="Molecule/Carrousel"
+	component={Carrousel}
+	argTypes={{
+		count: { defaultValue: 3, type: "number" },
+	}} />
 
-<Template let:args={{ pictures }}>
-	<Carrousel {pictures} />
+<Template let:args={{ count }}>
+	<Carrousel pictures={fakePictures(count)} />
 </Template>
 
-<Story name="Default" args={{ pictures: fakePictures() }} />
+<Story name="Default" args={{ count: 3 }} />
