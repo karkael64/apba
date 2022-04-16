@@ -24,8 +24,7 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.2.2",
-		"@sveltejs/adapter-vercel": "^1.0.0-next.0",
-		"@sveltejs/app-utils": "^1.0.0-next.0",
+		"@sveltejs/adapter-vercel": "next",
 		"cookie": "^0.4.1",
 		"dotenv": "^10.0.0"
 	},

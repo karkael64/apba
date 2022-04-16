@@ -15,11 +15,12 @@
 		"@cmp": "yarn workspace components",
 		"@psm": "yarn workspace prisma",
 		"@web": "yarn workspace web",
-		"postinstall": "yarn @psm generate",
+		"postinstall": "yarn @psm generate; ln -s $(pwd)/packages/prisma/node_modules/@prisma ./packages/web/node_modules",
 		"build:db": "yarn @psm push && yarn @psm seed",
 		"start": "yarn @web dev",
 		"sb": "yarn @cmp storybook",
-		"build": "yarn @web build"
+		"build": "yarn @web build",
+		"clean": "rm -rf ./node_modules; rm -rf ./packages/*/node_modules; rm -rf ./packages/web/.svelte-kit"
 	},
 	"devDependencies": {
 		"prettier-plugin-svelte": "^2.4.0"
