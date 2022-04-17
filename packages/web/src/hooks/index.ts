@@ -1,7 +1,7 @@
 import cookie from 'cookie';
 // import setLocalSession from './session';
 import type { GetSession, Handle } from '@sveltejs/kit';
-import type { Locals, Env } from '../types/hooks';
+import type { Env, UserSession } from '../types/hooks';
 
 const env: Env = (() => {
 	const ptl = import.meta.env.VITE_PROTOCOL;
@@ -20,9 +20,9 @@ const env: Env = (() => {
 	};
 })();
 
-export const handle: Handle<Locals> = async ({ event, resolve }) => {
+export const handle: Handle = async ({ event: request, resolve }) => {
 	// set locals
-	event.locals = { env } as Locals;
+	request.locals = { env };
 
 	// const loginRedirect = setLocalSession(request);
 	// if (loginRedirect) {
@@ -30,17 +30,18 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	// }
 
 	// run request
-	const response = await resolve(event);
+	const response = await resolve(request);
+	const session = request.locals.session as UserSession;
 
 	// set token
-	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
-	if (!cookies.token && event.locals.session?.token) {
-		response.headers['set-cookie'] = `token=${event.locals.session.token}; Path=/; HttpOnly`;
+	const cookies = cookie.parse(request.request.headers.get('cookie') || '');
+	if (!cookies.token && session?.token) {
+		response.headers['set-cookie'] = `token=${session.token}; Path=/; HttpOnly`;
 	}
 
 	return response;
 };
 
-export const getSession: GetSession<Locals> = (request) => {
+export const getSession: GetSession = (request) => {
 	return request.locals.session ?? null;
 };
