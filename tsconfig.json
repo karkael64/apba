@@ -28,5 +28,5 @@
 			"components": ["packages/components/index.ts"]
 		}
 	},
-	"exclude": ["packages/components/src/common/colors.*"]
+	"exclude": ["packages/components/src/common/colors.*", "packages/prisma/build"]
 }

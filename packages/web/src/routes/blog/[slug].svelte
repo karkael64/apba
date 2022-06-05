@@ -1,8 +1,13 @@
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit';
 	export const load: Load = async ({ params: { slug }, fetch }) => {
-		const { blog } = await (await fetch(`/api/blogs/${slug}`)).json();
-		return { props: { blog } };
+		const req = await fetch(`/api/blogs/${slug}`);
+		try {
+			const { blog } = await req.json();
+			return { props: { blog } };
+		} catch (e) {
+			return { error: "Error", status: 500 };
+		}
 	};
 </script>
 
@@ -15,7 +20,6 @@
 <div>
 	<h3>{blog?.title}</h3>
 	<p>{blog?.body}</p>
-
 </div>
 
 {#each blog?.sections as section (section.id)}

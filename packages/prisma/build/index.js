@@ -53,8 +53,8 @@ Prisma.validator = () => (val) => val
 
 // folder where the generated client is found
 const dirname = findSync(process.cwd(), [
-  '"build"',
-  '""',
+  '"packages/prisma/build"',
+  '"prisma/build"',
 ], ['d'], ['d'], 1)[0] || __dirname
 
 /**
@@ -197,10 +197,10 @@ Object.assign(exports, Prisma)
  * The process.cwd() annotation is only needed for https://github.com/vercel/vercel/tree/master/packages/now-next
 **/
 path.join(__dirname, 'query-engine-debian-openssl-1.1.x');
-path.join(process.cwd(), './build/query-engine-debian-openssl-1.1.x')
+path.join(process.cwd(), './packages/prisma/build/query-engine-debian-openssl-1.1.x')
 /**
  * Annotation for `@vercel/nft`
  * The process.cwd() annotation is only needed for https://github.com/vercel/vercel/tree/master/packages/now-next
 **/
 path.join(__dirname, 'schema.prisma');
-path.join(process.cwd(), './build/schema.prisma');
+path.join(process.cwd(), './packages/prisma/build/schema.prisma');

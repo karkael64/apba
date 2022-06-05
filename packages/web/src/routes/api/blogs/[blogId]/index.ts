@@ -8,6 +8,7 @@ const blogPickAttributes = (object: Blog & Record<string, unknown>): Omit<Blog, 
 export const get: RequestHandler<never, { blog: Blog & { sections: BlogSection[] } }> = async ({
 	params: { blogId: slug }
 }) => {
+	console.log({ client });
 	const id = parseInt(slug);
 	if (isNaN(id)) {
 		return {
@@ -24,7 +25,7 @@ export const get: RequestHandler<never, { blog: Blog & { sections: BlogSection[]
 	};
 };
 
-export const patch: RequestHandler<never, Partial<Blog>, { blog: Blog }> = async ({
+export const patch: RequestHandler<{ slug: string }, { blog: Blog }> = async ({
 	params: { slug: id },
 	request
 }) => ({
@@ -36,8 +37,6 @@ export const patch: RequestHandler<never, Partial<Blog>, { blog: Blog }> = async
 	}
 });
 
-export const del: RequestHandler<never, never, { blog: Blog }> = async ({
-	params: { slug: id }
-}) => ({
+export const del: RequestHandler<never, { blog: Blog }> = async ({ params: { slug: id } }) => ({
 	body: { blog: await client.blog.delete({ where: { id: parseInt(id) } }) }
 });

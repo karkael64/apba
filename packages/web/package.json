@@ -13,7 +13,7 @@
 	"devDependencies": {
 		"@sveltejs/kit": "next",
 		"@types/cookie": "^0.4.0",
-		"prettier": "~2.2.1",
+		"prettier": "~2.3.2",
 		"prettier-plugin-svelte": "^2.4.0",
 		"svelte": "^3.34.0",
 		"svelte-check": "^2.0.0",

@@ -15,7 +15,7 @@
 		"@cmp": "yarn workspace components",
 		"@psm": "yarn workspace prisma",
 		"@web": "yarn workspace web",
-		"postinstall": "yarn @psm generate; ln -s $(pwd)/packages/prisma/node_modules/@prisma ./packages/web/node_modules",
+		"postinstall": "yarn @psm generate",
 		"build:db": "yarn @psm push && yarn @psm seed",
 		"start": "yarn @web dev",
 		"sb": "yarn @cmp storybook",

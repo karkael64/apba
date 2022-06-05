@@ -2,13 +2,13 @@ import { client, BlogSection } from '$lib/db';
 import { isModelName, modelErrors } from 'components';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const get: RequestHandler<never, never, { blogSections: BlogSection[] }> = async ({
+export const get: RequestHandler<never, { blogSections: BlogSection[] }> = async ({
 	params: { blogId }
 }) => ({
 	body: { blogSections: await client.blogSection.findMany({ where: { blogId: parseInt(blogId) } }) }
 });
 
-export const post: RequestHandler<never, Partial<BlogSection>, string> = async ({
+export const post: RequestHandler<{ blogId: string }, string> = async ({
 	params: { blogId: slug },
 	request
 }) => {
